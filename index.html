@@ -7,7 +7,15 @@
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
+  <script>
+    var globalUnityInstance = null;
+  </script>
   <body>
+    <div style="text-align: center;">
+    <button id="btn" style="width:200px;height: 60px;margin-top: 20px;">incr speed</button>
+    <button id="btn1" style="width:200px;height: 60px;margin-top: 20px;">get speed</button>
+    <input type="text" id="ShowInfo" style="width: 120px; height: 30px;">
+  </div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -56,11 +64,11 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/ele-machine.loader.js";
+      var loaderUrl = buildUrl + "/ele-machine3.loader.js";
       var config = {
-        dataUrl: buildUrl + "/ele-machine.data",
-        frameworkUrl: buildUrl + "/ele-machine.framework.js",
-        codeUrl: buildUrl + "/ele-machine.wasm",
+        dataUrl: buildUrl + "/ele-machine3.data",
+        frameworkUrl: buildUrl + "/ele-machine3.framework.js",
+        codeUrl: buildUrl + "/ele-machine3.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "My project",
@@ -97,11 +105,28 @@
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
           };
+          globalUnityInstance = unityInstance;
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
     </script>
+
+     <script>
+      document.getElementById('btn').onclick = () =>  {
+        // alert("start ======");
+        globalUnityInstance.SendMessage("Cylinder008","incrSpeed","");
+      }
+
+      document.getElementById('btn1').onclick = () =>  {
+        // alert("start ======");
+        globalUnityInstance.SendMessage("Cylinder008","getSpeed","");
+      }
+    </script>
   </body>
 </html>
+
+
+
+
